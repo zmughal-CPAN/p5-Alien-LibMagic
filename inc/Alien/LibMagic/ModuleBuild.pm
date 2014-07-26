@@ -25,6 +25,7 @@ sub alien_do_commands {
 		}
 
 		if( $phase eq 'build' ) {
+			# copy libregex files into shared dir
 			for my $file ( [qw(include regex.h)],
 					[qw(lib libgnurx.dll.a)],
 					[qw(lib libregex.a)] ) {
