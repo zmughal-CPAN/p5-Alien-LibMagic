@@ -1,0 +1,77 @@
+diff --git a/regcomp.c b/regcomp.c
+index 78a1218..c9c7ac5 100644
+--- a/regcomp.c
++++ b/regcomp.c
+@@ -506,11 +506,7 @@ weak_alias (__regcomp, regcomp)
+    from either regcomp or regexec.   We don't use PREG here.  */
+ 
+ size_t
+-regerror (errcode, preg, errbuf, errbuf_size)
+-    int errcode;
+-    const regex_t *__restrict preg;
+-    char *__restrict errbuf;
+-    size_t errbuf_size;
++regerror (int errcode, const regex_t *__restrict preg, char *__restrict errbuf, size_t errbuf_size)
+ {
+   const char *msg;
+   size_t msg_size;
+@@ -2510,7 +2506,11 @@ parse_dup_op (bin_tree_t *elem, re_string_t *regexp, re_dfa_t *dfa,
+     old_tree = NULL;
+ 
+   if (elem->token.type == SUBEXP)
++#ifdef _WIN64
++    postorder (elem, mark_opt_subexp, (void *) (long long) elem->token.opr.idx);
++#else
+     postorder (elem, mark_opt_subexp, (void *) (long) elem->token.opr.idx);
++#endif
+ 
+   tree = create_tree (dfa, elem, NULL, (end == -1 ? OP_DUP_ASTERISK : OP_ALT));
+   if (BE (tree == NULL, 0))
+@@ -3722,7 +3722,11 @@ create_token_tree (re_dfa_t *dfa, bin_tree_t *left, bin_tree_t *right,
+ static reg_errcode_t
+ mark_opt_subexp (void *extra, bin_tree_t *node)
+ {
++#ifdef _WIN64
++  int idx = (int) (long long) extra;
++#else
+   int idx = (int) (long) extra;
++#endif
+   if (node->token.type == SUBEXP && node->token.opr.idx == idx)
+     node->token.opt_subexp = 1;
+ 
+diff --git a/regex.c b/regex.c
+index d2d4f28..bec9f9d 100644
+--- a/regex.c
++++ b/regex.c
+@@ -57,7 +57,7 @@
+    #undefs RE_DUP_MAX and sets it to the right value.  */
+ #include <limits.h>
+ 
+-#include <regex.h>
++#include "regex.h"
+ #include "regex_internal.h"
+ 
+ #include "regex_internal.c"
+diff --git a/regex_internal.h b/regex_internal.h
+index b0c4d35..f6619d8 100644
+--- a/regex_internal.h
++++ b/regex_internal.h
+@@ -420,6 +420,7 @@ static unsigned int re_string_context_at (const re_string_t *input, int idx,
+ #define re_string_skip_bytes(pstr,idx) ((pstr)->cur_idx += (idx))
+ #define re_string_set_index(pstr,idx) ((pstr)->cur_idx = (idx))
+ 
++#ifndef alloca
+ #ifdef __GNUC__
+ # define alloca(size)   __builtin_alloca (size)
+ # define HAVE_ALLOCA 1
+@@ -430,6 +431,7 @@ static unsigned int re_string_context_at (const re_string_t *input, int idx,
+ #else
+ # error No alloca()
+ #endif
++#endif
+ 
+ #ifndef _LIBC
+ # if HAVE_ALLOCA
+-- 
+1.9.4.msysgit.0
+
