@@ -25,13 +25,6 @@ sub alien_do_commands {
 
 	if( $^O eq 'MSWin32' ) {
 		load 'Alien::MSYS';
-		$self->alien_build_commands([
-			map {
-				my $c = $_;
-				$c =~ s/^%pconfigure/sh %pconfigure/;
-				$c
-			} @{$self->alien_build_commands}
-		]);
 		my $extract_to = $phase eq 'build'
 			? $dir
 			: $self->alien_library_destination;
