@@ -1,5 +1,5 @@
 package Alien::LibMagic::Install::Files;
-$Alien::LibMagic::Install::Files::VERSION = '0.001';
+$Alien::LibMagic::Install::Files::VERSION = '0.002';
 # allows other packages to use ExtUtils::Depends like so:
 #   use ExtUtils::Depends;
 #   my $p = new ExtUtils::Depends MyMod, Alien::LibMagic;
@@ -24,7 +24,7 @@ Alien::LibMagic::Install::Files
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 AUTHOR
 

@@ -1,5 +1,5 @@
 package Alien::LibMagic;
-$Alien::LibMagic::VERSION = '0.001';
+$Alien::LibMagic::VERSION = '0.002';
 use strict;
 use warnings;
 
@@ -27,7 +27,7 @@ Alien::LibMagic - Alien package for the libmagic library
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 Inline support
 
