@@ -4,7 +4,7 @@
       "Zakariyya Mughal <zmughal@cpan.org>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Dist::Zilla version 6.012, CPAN::Meta::Converter version 2.150010",
+   "generated_by" : "Dist::Zilla version 6.014, CPAN::Meta::Converter version 2.150010",
    "license" : [
       "perl_5"
    ],
@@ -51,7 +51,7 @@
          }
       }
    },
-   "release_status" : "testing",
+   "release_status" : "stable",
    "resources" : {
       "homepage" : "https://github.com/zmughal-p5CPAN/p5-Alien-LibMagic",
       "repository" : {
@@ -60,7 +60,7 @@
          "web" : "https://github.com/zmughal-p5CPAN/p5-Alien-LibMagic"
       }
    },
-   "version" : "0.002_01",
+   "version" : "0.003",
    "x_alienfile" : {
       "generated_by" : "Dist::Zilla::Plugin::AlienBuild version 0.29",
       "requires" : {
@@ -81,6 +81,7 @@
       }
    },
    "x_generated_by_perl" : "v5.26.1",
-   "x_serialization_backend" : "Cpanel::JSON::XS version 4.14"
+   "x_serialization_backend" : "Cpanel::JSON::XS version 4.14",
+   "x_spdx_expression" : "Artistic-1.0-Perl OR GPL-1.0-or-later"
 }
 
